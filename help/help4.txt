@@ -1,0 +1,19 @@
+The whole idea of this kind of URL routing is to create dynamic pages where
+part of the URL will be used as an identifier for a certain resource, that will
+be used to compose a page. This identifier can be an integer ID or a string for
+example
+
+The name in regular expression wouldn't matter. But is a good practice to use
+named parametrs because when we start composing bigger URLs capturing multiple
+IDs and variables, it will be easer to read
+
+So in the setUp method, we prepare the environment to run the tests, so to
+simulate a scenario
+
+Always use the {% url %} template tag to compose the applications URLs. The
+first parametr is the name of the URL (defined in the URLconf, i.e., the
+urls.py), then you can pass an arbitrary number of arguments as needed.
+
+URL routing is a fundamental part of a web application
+
+List of Useful URL Patterns

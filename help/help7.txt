@@ -1,0 +1,12 @@
+As the name suggests, the {% include %} is used to include HTML templates
+in atother template. It's a very useful way to reuse HTML components in a
+project
+
+The next form we implement, we can simply use
+{% include 'includes/form.html' %} to render it
+
+Now we are using the assertIsInstance method. Basically we are grabbing the form
+instance in the context data, and checking if it is a NewTopicForm
+
+In the last test, we added the self.assertTrue(form.errors) to make sure the
+form is showing errors when the data is invalid

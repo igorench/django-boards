@@ -1,0 +1,38 @@
+The reason why we used board.topics.all instead   of just board.topics is
+because board.topics is a Related Manager, which is pretty much similar to a
+Model Manager, usually available on the board.objects property. So, to return
+all topics associated with a given board, we have to run board.topics.all()
+To filter some data we could do board.topics.filter(subject__contains='Hello')
+
+We have to use parenthesis, because all() is a method. When writing code
+using the Django Template Language, in an HTML template file, we don't use
+parenthesis, so it's just board.topics.all
+
+The second thing is that we are making use of a ForeignKey
+{{ topic.starter.username }}
+{{ topic.starter.email }} - for get email user
+
+The forms API is available in the module django.forms. Django works with two
+types of forms forms.Form and forms.ModelForm.
+
+Form class is a general purpose form implementation. We can use it to process
+data that are not directly associated with a model in our application.
+
+A ModelForm is a subclass of Form, and it's associated with a model class
+
+The form have three rendering options form.as_table, form.as_url and form.as_p
+It's a quick way to render all the fields of a form
+
+We are using django-widget-tweaks. First, we load it in the template by using
+the {% load widget_tweaks %}
+
+The render_field is not part of Django; it lives inside the package we installed
+To use it we have to pass a form field instance as the first parametr, and then
+after we can add arbitrary HTML attributes to complement it. It will be useful
+because then we can assign classes based on certain conditions.
+
+For example
+{% render_field form.subject class="form-control" %}
+{% render_field form.message class="form-control" placeholder="form.message.label" %}
+{% render_field field class="form-control" placeholder="Write a message!" %}
+{% render_field field style="font-size: 20px" %}

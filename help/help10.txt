@@ -1,0 +1,69 @@
+
+With the line 
+queryset = super().get_queryset() we are reusing the get_queryset method from the parent class. that is, the
+UpdateView class. Then, we are adding an extra filter to the queryset, which is filtering the post using the
+logged in user, available inside the request object.
+
+from django.core.paginator import Paginator 
+
+Here we are telling django to paginate our QuerySet in pages of 20 each
+paginator = Paginator(queryset, 20)
+
+Now let's explore some of the paginator properties
+
+# count the number of elements in the pagination
+paginator.count
+104
+
+# total number of pages 
+# 104 elements, paginating 20 per page gives you 6 pages
+# where the last page will have only 4 elements
+paginator.num_pages
+6
+
+# range of pages that can be used to iterate and create the 
+# links to the pages in the template
+poaginator.page_range
+range(1, 7)
+
+# returns a Page instance 
+paginator.page(2)
+<Page 2 of 6>
+
+page = paginator.page(2)
+
+type(page)
+django.core.paginator.page
+
+type(paginator)
+django.core.paginator.Paginator
+
+If we try to get a page that doesn't exist, the Paginator will throw an exception
+paginator.page(7)
+EmptyPage: That page contains no results 
+
+Now let's explore the attributes and methods offered by the Page class 
+
+page = paginator.page(1)
+
+# Check if there is another page after this one 
+page.has_next()
+True
+
+# If there is no previous page, that means this one is the first page
+page.has_previous()
+False
+
+page.has_other_pages()
+True
+
+page.next_page_number()
+2
+
+# Take care here, since there is no previous page
+# If we call the method 'previous_page_number() we will get an exception
+page.previous_page_number()
+EmptyPage: That page number is less than 1
+
+
+

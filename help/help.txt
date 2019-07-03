@@ -1,0 +1,42 @@
+django-admin strartproject project_name - for create a new project
+
+django-admin startapp app_name
+
+python manage.py runserver - for start server
+
+app - is a web application that does something
+
+project - is a collection of Web application and apps
+
+    project files
+init.py - this empty file tells Python that this folder is a Python package
+
+manage.py -  a shortcut to use django-admin command-line utility
+
+settings.py -  this file contains all the project's configuration. We will
+return to this file all the time!
+
+urls.py -  this file is responsible for mapping the routers and paths in out
+project For example, if you want to show something in URL /about/, you have to map it
+here first
+
+wsgi.py - this file is a simple gateway interface used for deployment
+
+
+    app files
+migrations - here Django store some files to keep track of the changes
+you create in the models.py file, so to keep the database and the models.py
+synhronized
+
+admin.py - this is a configuration file for a built-in Django app called
+Django Admin
+
+apps.py - this is a configuration file of the app itself
+
+models.py - here is where we define the entities of our Web application. The
+models are translated authomatically by Django into Database tables
+
+tests.py - this file is used to write unit tests for the app
+
+views.py - this is the file where we handle the request/response cycle
+of our Web application

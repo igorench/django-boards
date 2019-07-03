@@ -1,0 +1,55 @@
+python manage.py createsuperuser - command for creating an administrator account
+then we need input username, email, password
+
+admin.site.register(obj) - for register admin
+
+The special urls.py is called root URLconf. It's defined in the settings.py
+file
+ROOT_URLCONF = 'start_project.urls'
+
+When Django receives a request, it starts searching for a match in the
+project's URLconf. It starts with the first entry of the urlpatterns variable
+and test the requested URL against each url entry
+If Django finds a match, it will pass the request to the view function, which is
+the second parametr of the url. Now, if Django doesn't find a match in the
+URLconf, it will raise a 404 exception, which is the error code for Page Not
+Found.
+
+def url(regex, view, kwargs=None, name=None):
+    #....
+regex - a regular expression for matching URL patterns in strings
+
+view - a view function used to process the user request for a matched URL
+
+kwargs - arbitrary keyword arguments that's passed to the target view. It is
+normally used to do some simple customization on reusable views. We dont't use
+it very often.
+
+name - a unique identifier for a given URL. This is very important feature.
+Always remember to name your URLs. With this, you can change a specific URL in
+the whole project by just changing the regex. So it's important to never hard
+code URLs in the views or templates, and always refer to the URLs by its name
+
+render() - combines a given template with a given context dictionary and
+returns an HttpResponse object with that rendered text
+
+A more advanced usage of URL routing is achieved by taking advantage of the
+regex to match certain types of data and create dynamic URLs
+
+If the about page was defined after the username URL pattern, Django would
+never find it, because the word "about" would match the username regex, and the
+view user_profile would be processed instead of the about page
+
+There are some side effects to that. For example, from now on, we would have to
+treat "about" as a forbidden username, because if a user picked "about" as
+their username, this person would never see their profile page
+
+So, keep that mind! And always test your routes.
+
+If you want to design cool URLs for user profiles, the easiest solution to avoid
+URL collision is by adding a prefix like /u/vitorfs/, or like Medium does
+/@vitorfs/, where "a" is the prefix
+
+If you want no prefix at all, consider using a list of forbidden names like
+this
+github.com/shouldbee/reserved-usernames/blob/master/reserved-usernames.csv

@@ -1,0 +1,65 @@
+use case diagram and class diagram
+
+When we create models.py, the next step is to tell Django to create the database
+so we can start using it
+
+python manage.py makemigrations - command for create our initial database
+python manage.py migrate - apply the migrations we generated to the database
+
+python use SQLite for default, but we can redefine database in file settings.py
+
+python manage.py shell - command for run python shell
+
+Board.objects.all() - return list of Boards objects
+
+Board.objects.get(id=1) - return object who has id = 1. If object
+don't exist will be except
+
+Summary of model's operations
+
+board = Board() - Create an object without saving
+
+board.save() - save an object (create or update)
+
+Board.objects.create(name='', description='') - create and save an object in the
+database
+
+Board.objects.all() - list all objects
+
+Board.objects.get(id=1) - get a single object, identified by a field
+
+In settings.py variable TEMPLATES keeps ways to our html template
+
+we need reverse to refer on page who we did in urls.py in reverse we give
+name argument from url function
+
+python manage.py test - for run unit tests
+
+django.urls.reverse() - get link like url function
+
+django.urls.resolve() - for get view from url
+
+To see more detail about test execution, set the verbosity to a higher level
+python manage.py test --verbosity=2
+
+Verbosity determines the amount of notifications and debug information that will
+be printed to the console; 0 is no output, 1 is normal output, and 2 is verbose
+output
+
+In static folder we must save our static files like css, images, libraries, js
+
+settings.py STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+{% load static %} - load the Static Files App
+the template teg {% static %} is used to compose the URL where the resource
+lives
+
+For instance {% static 'css/bootstrap.min.css' %} will return
+/static/css/bootstrap.min.css which is evaluated to
+http://127.0.0.1:8000/static/css/bootstrap.min.css.
+
+The {%static%} template tag uses the STATIC_URL configuration in the
+settings.py to compose the final URL

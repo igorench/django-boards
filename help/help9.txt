@@ -1,0 +1,46 @@
+Migration is a fundamental part of Web development with Django. It's how we evolve our application's
+models keeping the models' files synchronized with the database.
+
+When we first run the command python manage.py migrate Django grab all migrations files and generate 
+the database schema 
+
+When Django applies a migration, it has a special table called django_migrations. In this table, Django
+registers all the applied migrations.
+
+Before we can use our new field, we have to update the database schema. Execute the makemigrations command
+
+The makemigrations command automatically generated the 0003_topic_views.py file, which will be used to modify 
+the database, adding the views field.
+Now apply the migration by running the command migrate
+Now we can use it to keep track of the number of views a given topic is receiving
+
+Class-based views were introduced to make it easier  for developers to reuse and extend views 
+
+Function-Based Views(FBV) - is the simplest representation of a Django view: it's just a function that 
+receives an HttpRequest object and returns an HttpResponce 
+
+Class-Based Views (CBV) - is every Django view defined as a Python class that extends the django.views.generic.View
+abstract class. A CBV essentially is a class that wraps a FBV. CBVs are great to extend and reuse code. 
+
+Generic Class-Based Views(GCBV) - are buit-in CBVs that solve specific problems such as listing views, create,
+update, and delete views.
+
+A CBV is a view that extends the View class. The main difference here is that the request are handled inside
+class methods named after the HTTP methods, such as get, post, put, head, etc. So, here we don't need to do a
+conditional to check if the request is a POST or if it's a GET. The code goes straight to the right method.
+This logic is handled internally in the View class. 
+
+The way we refer to the CBVs in the urls.py module is a little bit different
+url(r'^new_post/$', views.NewPostView.as_view(), name='new_post')
+Here we need to use the as_view() class method, which returns a view function to the url patterns.
+
+Anyway, the good thing about CBV is that we can add more methods, and perhaps do something like this. 
+
+We can't decorate the class directly with the @login_required decorator. We have to use the utility 
+@method_decorator, and pass a decorator (or a list of decorators) and tell which method should be decorated
+In class-based views it's common to decorate the dispatch method. It's an internal method Django use 
+(defined inside the View class). All request pass through this method, so it's safe to decorate it
+@method_decorator(login_required, name='dispatch')
+class PostUpdateView(UpdateView):
+# ....
+

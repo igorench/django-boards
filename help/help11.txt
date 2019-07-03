@@ -1,0 +1,28 @@
+Observe now how we are navigating through the post object post.topic.board.pk
+If we didn't set the context_object_name to post, it would be avaliable
+as: object.topic.board.pk
+
+We can't decorate the class directly with the @login_required decorator. We
+have to use the utility @method_decorator, and pass a decorator (or a list of decorators)
+and tell wich method should be decorated. In class-based views it's common to decorate the
+dispatch method. It's an internal method Django use(defined inside the View class). All 
+requests pass through this method, so it's safe to decorate it.
+@method_decorator(login_required, name='dispatch')
+
+queryset.filter(created_by=self.request.user) - is filtering the post using the logged in user,
+available inside the request object 
+
+We can also add a very cool Markdown editor called SimpleMD
+By default, this plugin will transform the first text area it finds into a markdown editor
+
+humanize - it's a set of utility functions to add a "human touch" to data
+For example, we can use it to display date and time fields more naturally. Instead of showing
+the whole date, we can simply show "2 minutes ago"
+For using it we just add |naturaltime
+<td> topic.last_updated|naturaltime </td>
+
+A very ease way to add user profile pictures is by using Gravatar
+
+Next thing we want to do is try to control the view counting system a little bit more
+We don't want to the same user refreshing the page counting as multiple views. For this
+we can use sessions 

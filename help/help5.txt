@@ -1,0 +1,47 @@
+{% block %}  it is used to reserve a space in the template, which a "child"
+template (which extends the master page) can insert code and HTML within this
+space
+
+In the case of the {% block title %} we are also setting a default value, which
+is "Django Boards". It will be used if we don't set a value for the
+{% block title %} in a child template
+
+{% extends 'base.html' %} . This tag is telling Django to use the base.html
+template as a master page. After that, we are using the blocks to put the
+unique content of the page.
+
+Notice that we can reuse the default value of the block by calling
+{{ block.super }}
+
+In the <form> tag, we have to define the method attribute. This instruct the
+browser on how we  want to communicate with the server. The HTTP spec defines
+several request methods(verbs). But for the most part, we will only be using
+GET and POST request types.
+
+GET is perhaps the most common request type. It's used to retrieve data from
+the server. Every time you click on a link or type a URL directly into the
+browser, you are creating a GET request.
+
+POST is used when we want to change data on the server. So, generally speaking,
+every time we send data to the server that will result in a change in the state
+of a resource, we should always send it via POST request.
+
+Django protects all POST request using a CSRF Token (Cross-Site Request
+Forgery Token). It's a security measure to avoid external sites or applications
+to submit data to our application. Every time the application receives a POST,
+it will first look for the CSRF Token. If the  request has no token, or the
+token is invalid, it will discard the posted data.
+
+The result of the csrf_token template tag
+{% csrf_token %}
+Is a hidden field that's submitted along with the other form data
+<input type="hidden" name="csrmiddlewaretoken" value="jG2o6aWj65YGaqzCpl0TYTg5jn6SctjzRZ9KmluifVx0IVaxlwh97YarZKs54Y32">
+
+Another thing, we have to set the name of the HTML inputs. The name will be used
+to retrieve the data on the server side
+<input type="text" class="form-control" id="id_subject" name="subject">
+<textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
+
+Here is how we retrieve the data
+subject = request.POST['subject']
+message = request.POST['message']

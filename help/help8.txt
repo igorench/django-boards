@@ -1,0 +1,46 @@
+Accounts is a app because of this we must create a new app who will be
+do all things who reffer on user.
+django-admin startapp accounts
+
+Then we will add INSTALED_APPS in the settings.py
+
+The block {% block stylesheet %} {% endblock %} will be used to add extra CSS,
+specific to some page
+
+The block {% block body %} is wrapping the whole HTML document
+Notice how we named the end block {% endblock body %}. In cases like this
+it's a good practise to name the closing tag, so it's easier to identify
+where it ends. Now in the signup.html, instead of using the {% block content %}
+we can use the {% block body %}
+
+from django.contrib.auth.forms import UserCreationForm - biuld-in sign up form
+
+If the form is valid, a User instance is created with the user = form.save()
+
+The views for reset password are buit-in, we don't need to implement anything
+All we need to do is add the routes to the urls.py and create the templates
+
+@login_required - this decorator prevents non-authorized users to access this page
+If the users is not logged in, Django will redirect them to the login page 
+
+The LoginView already expects a next parametr to execute the redirect
+Next parametr is part of a build-in functionality 
+
+We could run test for a specific app - python manage.py test boards
+For a specific test file - python manage.py test boards.tests.test_view_topic_posts
+Or just a specific test case - python manage.py test boards.test.test_view_topic_posts.TopicPostsTest.test_status_code
+
+Truncator it's a convenient way to truncate long strings into an arbitrary string size(here we are using 30)
+
+Post.objects.count() - count objects in the Post
+
+The double underscores topic__board is used to navigate through the models' relationships 
+Under the hoods, Django builds the bridge between the Board - Topic - Post, and build a SQL query to retrieve 
+just the posts that belong to a specific board.
+
+We are using the annotate QuerySet method to generate a new "column" on the fly
+This new column, which will be translated into a property, accessible via topic.replies contain the count of posts
+a given topic has.
+
+
+
