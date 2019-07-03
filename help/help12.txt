@@ -1,0 +1,18 @@
+No matter if the code is stored in a public or private remote repository, sensetive information should 
+never be committed and pushed to the remote repository. That includes secret keys, passwords, API keys
+etc.
+
+At this point, we have to deal with two specific types of configuration in our settings.py module:
+- Sensetive information such as keys and passwords
+- Configurations that are specific to a given environment
+
+Python Decouple - it will search for a local file named .env to set the configuration variables and will
+fall back to the environment variables. It also provides an interface to define default values, transform 
+the data into int, bool, and list when applicable
+
+The .env file is ignored in the .gitignore file, so every time we are going to deploy the application or run 
+in a different machine, we will have to create a .env file and add the necessary configuration 
+
+It's a good practice to keep track of the project's dependencies, so to be easier to install it on
+another machine
+
